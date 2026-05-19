@@ -6,7 +6,6 @@
   <title>Vinicius Mariano — Líder de Dados e Automações</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -44,7 +43,6 @@
       min-height: 100vh;
     }
 
-    /* ─── NOISE TEXTURE ─────────────────────────── */
     body::before {
       content: '';
       position: fixed;
@@ -55,7 +53,6 @@
       z-index: 0;
     }
 
-    /* ─── GRID LINE BACKGROUND ──────────────────── */
     body::after {
       content: '';
       position: fixed;
@@ -68,7 +65,6 @@
       z-index: 0;
     }
 
-    /* ─── LAYOUT ───────────────────────────────── */
     .container {
       max-width: 900px;
       margin: 0 auto;
@@ -112,9 +108,7 @@
     .nav-links a:hover { color: var(--text-primary); }
 
     /* ─── HERO ─────────────────────────────────── */
-    .hero {
-      padding: 7rem 0 5rem;
-    }
+    .hero { padding: 7rem 0 5rem; }
 
     .hero-inner {
       display: flex;
@@ -123,13 +117,12 @@
       gap: 3rem;
     }
 
-    .hero-content {
-      flex: 1;
-    }
+    .hero-content { flex: 1; }
 
     .hero-avatar-wrap {
       flex-shrink: 0;
       padding-top: 1rem;
+      animation: fadeUp 0.6s ease 0.1s both;
     }
 
     .hero-avatar {
@@ -137,7 +130,7 @@
       height: 170px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid rgba(79, 156, 249, 0.3);
+      border: 2px solid rgba(79,156,249,0.3);
       display: block;
       filter: grayscale(10%);
       transition: border-color 0.3s, filter 0.3s;
@@ -154,7 +147,7 @@
       color: var(--accent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -167,6 +160,37 @@
       height: 1px;
       background: var(--accent);
       opacity: 0.6;
+    }
+
+    /* ─── AVAILABILITY BADGE ───────────────────── */
+    .availability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      border: 1px solid rgba(62,207,142,0.3);
+      background: var(--green-dim);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .avail-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 5px var(--green);
+      flex-shrink: 0;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
     }
 
     .hero h1 {
@@ -191,6 +215,7 @@
       margin-bottom: 2.5rem;
     }
 
+    /* ─── STACK PILLS ──────────────────────────── */
     .hero-stack {
       display: flex;
       flex-wrap: wrap;
@@ -207,11 +232,6 @@
       padding: 0.25rem 0.6rem;
       letter-spacing: 0.05em;
       transition: border-color 0.2s, color 0.2s;
-    }
-
-    .stack-pill:hover {
-      border-color: var(--border-hover);
-      color: var(--text-secondary);
     }
 
     .stack-pill.pill-amber  { color: var(--amber);  border-color: rgba(245,166,35,0.35); }
@@ -254,13 +274,15 @@
       border: 1px solid var(--border);
       padding: 0.65rem 1.4rem;
       border-radius: 6px;
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--border-hover);
-      color: var(--text-primary);
-    }
+    .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+    .btn-linkedin { border-color: rgba(79,156,249,0.35); color: var(--accent); }
+    .btn-linkedin:hover { border-color: var(--accent); background: var(--accent-dim); }
+    .btn-github  { border-color: rgba(167,139,250,0.35); color: var(--purple); }
+    .btn-github:hover  { border-color: var(--purple); background: var(--purple-dim); }
 
     /* ─── SECTION HEADER ───────────────────────── */
     .section-header {
@@ -286,9 +308,9 @@
       color: var(--text-muted);
     }
 
-    /* ─── PROJECT GRID ─────────────────────────── */
     section { padding: 4rem 0; }
 
+    /* ─── PROJECT GRID ─────────────────────────── */
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -326,10 +348,7 @@
       transform: translate(-4px, 4px);
     }
 
-    .project-card:hover::after {
-      opacity: 1;
-      transform: translate(0, 0);
-    }
+    .project-card:hover::after { opacity: 1; transform: translate(0,0); }
 
     .project-category {
       font-family: var(--font-mono);
@@ -342,11 +361,11 @@
       width: fit-content;
     }
 
-    .cat-bi        { background: var(--accent-dim);  color: var(--accent); }
-    .cat-auto      { background: var(--green-dim);   color: var(--green); }
-    .cat-python    { background: var(--amber-dim);   color: var(--amber); }
-    .cat-sql       { background: var(--purple-dim);  color: var(--purple); }
-    .cat-eng       { background: var(--coral-dim);   color: var(--coral); }
+    .cat-bi     { background: var(--accent-dim); color: var(--accent); }
+    .cat-auto   { background: var(--green-dim);  color: var(--green); }
+    .cat-python { background: var(--amber-dim);  color: var(--amber); }
+    .cat-sql    { background: var(--purple-dim); color: var(--purple); }
+    .cat-eng    { background: var(--coral-dim);  color: var(--coral); }
 
     .project-name {
       font-size: 0.95rem;
@@ -376,7 +395,14 @@
       border: 1px solid var(--border);
       padding: 0.15rem 0.45rem;
       border-radius: 3px;
+      transition: color 0.15s, border-color 0.15s;
     }
+
+    .tool-tag.tt-amber  { color: var(--amber);  border-color: rgba(245,166,35,0.3); }
+    .tool-tag.tt-blue   { color: var(--accent); border-color: rgba(79,156,249,0.3); }
+    .tool-tag.tt-green  { color: var(--green);  border-color: rgba(62,207,142,0.3); }
+    .tool-tag.tt-coral  { color: var(--coral);  border-color: rgba(240,112,96,0.3); }
+    .tool-tag.tt-purple { color: var(--purple); border-color: rgba(167,139,250,0.3); }
 
     /* ─── ABOUT ────────────────────────────────── */
     .about-grid {
@@ -433,94 +459,52 @@
     }
 
     /* ─── SKILL COLORS ─────────────────────────── */
-    .sk-amber        { color: var(--amber) !important; }
-    .sk-amber .skill-dot  { background: var(--amber); }
+    .sk-amber        { color: var(--amber)  !important; }
+    .sk-amber  .skill-dot { background: var(--amber); }
     .sk-blue         { color: var(--accent) !important; }
-    .sk-blue  .skill-dot  { background: var(--accent); }
-    .sk-green        { color: var(--green) !important; }
-    .sk-green .skill-dot  { background: var(--green); }
-    .sk-coral        { color: var(--coral) !important; }
-    .sk-coral .skill-dot  { background: var(--coral); }
+    .sk-blue   .skill-dot { background: var(--accent); }
+    .sk-green        { color: var(--green)  !important; }
+    .sk-green  .skill-dot { background: var(--green); }
+    .sk-coral        { color: var(--coral)  !important; }
+    .sk-coral  .skill-dot { background: var(--coral); }
     .sk-purple       { color: var(--purple) !important; }
     .sk-purple .skill-dot { background: var(--purple); }
 
-    /* ─── LINKEDIN / GITHUB BUTTONS ────────────── */
-    .btn-linkedin {
-      border-color: rgba(79,156,249,0.35);
-      color: var(--accent);
-    }
-    .btn-linkedin:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-    .btn-github {
-      border-color: rgba(167,139,250,0.35);
-      color: var(--purple);
-    }
-    .btn-github:hover {
-      border-color: var(--purple);
-      color: var(--purple);
-      background: var(--purple-dim);
-    }
-
-    /* ─── GITHUB CALENDAR ──────────────────────── */
+    /* ─── GITHUB CHART ─────────────────────────── */
     .calendar-wrapper {
-      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 2rem;
-      overflow-x: auto;
+      overflow: hidden;
     }
 
-    .calendar {
-      min-height: 140px;
-      font-size: 0.82rem;
+    .gh-chart-inner {
+      background: #ffffff;
+      padding: 1.25rem 1.5rem 0.75rem;
+    }
+
+    .gh-chart {
+      width: 100%;
+      display: block;
+    }
+
+    .gh-chart-footer {
+      background: var(--bg-card);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
       color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* restore sr-only — global CSS reset strips overflow:hidden */
-    .sr-only {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
+    .gh-chart-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    /* dark theme container */
-    .calendar .js-calendar-graph,
-    .calendar .js-yearly-contributions,
-    .calendar .contrib-footer,
-    .calendar .float-left { background: transparent !important; }
-
-    /* text and links */
-    .calendar svg text { fill: var(--text-muted) !important; }
-    .calendar .contrib-legend,
-    .calendar .text-small,
-    .calendar .text-gray,
-    .calendar .contrib-footer { color: var(--text-muted) !important; }
-    .calendar a { color: var(--text-muted) !important; text-decoration: none; }
-    .calendar a:hover { color: var(--accent) !important; }
-    .calendar h2, .calendar .f4 { display: none !important; }
-
-    /* contribution squares — accent blue scale */
-    .calendar rect[data-level="0"] { fill: rgba(255,255,255,0.05) !important; }
-    .calendar rect[data-level="1"] { fill: rgba(79,156,249,0.25) !important; }
-    .calendar rect[data-level="2"] { fill: rgba(79,156,249,0.48) !important; }
-    .calendar rect[data-level="3"] { fill: rgba(79,156,249,0.72) !important; }
-    .calendar rect[data-level="4"] { fill: rgba(79,156,249,0.95) !important; }
-
-    /* legend */
-    .calendar .legend li:nth-child(1) { background-color: rgba(255,255,255,0.05) !important; }
-    .calendar .legend li:nth-child(2) { background-color: rgba(79,156,249,0.25) !important; }
-    .calendar .legend li:nth-child(3) { background-color: rgba(79,156,249,0.48) !important; }
-    .calendar .legend li:nth-child(4) { background-color: rgba(79,156,249,0.72) !important; }
-    .calendar .legend li:nth-child(5) { background-color: rgba(79,156,249,0.95) !important; }
+    .gh-chart-footer a:hover { color: var(--accent); }
 
     /* ─── CONTACT ──────────────────────────────── */
     .contact-row {
@@ -544,10 +528,7 @@
       letter-spacing: 0.03em;
     }
 
-    .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
 
     .contact-link svg {
       width: 14px;
@@ -578,24 +559,18 @@
       .hero-avatar-wrap { padding-top: 0; }
     }
 
-    /* ─── FADE IN ──────────────────────────────── */
+    /* ─── ANIMATIONS ───────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-content > * {
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
-    .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
-    .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
-    .hero-content > *:nth-child(4) { animation-delay: 0.32s; }
-    .hero-content > *:nth-child(5) { animation-delay: 0.38s; }
-
-    .hero-avatar-wrap {
-      animation: fadeUp 0.6s ease 0.1s both;
-    }
+    .hero-content > *:nth-child(1) { animation: fadeUp 0.6s ease 0.05s both; }
+    .hero-content > *:nth-child(2) { animation: fadeUp 0.6s ease 0.12s both; }
+    .hero-content > *:nth-child(3) { animation: fadeUp 0.6s ease 0.20s both; }
+    .hero-content > *:nth-child(4) { animation: fadeUp 0.6s ease 0.28s both; }
+    .hero-content > *:nth-child(5) { animation: fadeUp 0.6s ease 0.34s both; }
+    .hero-content > *:nth-child(6) { animation: fadeUp 0.6s ease 0.40s both; }
   </style>
 </head>
 <body>
@@ -619,6 +594,10 @@
       <div class="hero-inner">
         <div class="hero-content">
           <p class="hero-label">Líder de Dados e Automações · Eletrofrigor</p>
+          <div class="availability-badge">
+            <span class="avail-dot"></span>
+            Disponível para projetos — dados &amp; automação de processos
+          </div>
           <h1>Vinicius<br /><em>Mariano</em></h1>
           <p class="hero-desc">
             3 anos na área de dados, hoje Líder de Dados e Automações na Eletrofrigor.
@@ -663,7 +642,6 @@
 
       <div class="project-grid">
 
-        <!-- PROJETO 1 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-bi">BI & Dashboard</span>
           <p class="project-name">Dashboard de Pipeline de Cotações</p>
@@ -671,14 +649,13 @@
             Análise do funil de cotações integrando tabelas TGFCAB, TGFITE e TGFCAB_EXC com status ABERTO, GANHO, EXCLUÍDO e CANCELADO. Taxa de conversão e prazo médio por carteira.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">Power BI</span>
-            <span class="tool-tag">Oracle SQL</span>
-            <span class="tool-tag">DAX</span>
-            <span class="tool-tag">Sankhya ERP</span>
+            <span class="tool-tag tt-blue">Power BI</span>
+            <span class="tool-tag tt-purple">Oracle SQL</span>
+            <span class="tool-tag tt-blue">DAX</span>
+            <span class="tool-tag tt-coral">Sankhya ERP</span>
           </div>
         </a>
 
-        <!-- PROJETO 2 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-sql">Engenharia SQL</span>
           <p class="project-name">Indicadores Operacionais Semanais</p>
@@ -686,13 +663,12 @@
             Dashboard semanal com CTEs em Oracle SQL — movimentações, estoque em trânsito (loc. 51000000), garantias e devoluções, consolidado com TRUNC(DTNEG, 'IW') para semanas ISO.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">Oracle SQL</span>
-            <span class="tool-tag">CTEs</span>
-            <span class="tool-tag">Power BI</span>
+            <span class="tool-tag tt-purple">Oracle SQL</span>
+            <span class="tool-tag tt-purple">CTEs</span>
+            <span class="tool-tag tt-blue">Power BI</span>
           </div>
         </a>
 
-        <!-- PROJETO 3 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-auto">Automação</span>
           <p class="project-name">Integração ERP → SharePoint via n8n</p>
@@ -700,14 +676,13 @@
             Workflow n8n que extrai dados do Sankhya via API e sincroniza com SharePoint Lists. Suporte a formato entity-based e row-based da resposta DbExplorerSP.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">n8n</span>
-            <span class="tool-tag">JavaScript</span>
-            <span class="tool-tag">Sankhya API</span>
-            <span class="tool-tag">SharePoint</span>
+            <span class="tool-tag tt-green">n8n</span>
+            <span class="tool-tag tt-green">JavaScript</span>
+            <span class="tool-tag tt-coral">Sankhya API</span>
+            <span class="tool-tag tt-blue">SharePoint</span>
           </div>
         </a>
 
-        <!-- PROJETO 4 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-python">Python</span>
           <p class="project-name">Sistema de Análise de Estoque</p>
@@ -715,14 +690,13 @@
             Extração paginada da API Sankhya (4.500 registros/página), sugestões de transferências entre empresas com regras de negócio, ranking por criticalidade e exportação Excel via openpyxl.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">Python</span>
-            <span class="tool-tag">Sankhya API</span>
-            <span class="tool-tag">openpyxl</span>
-            <span class="tool-tag">Pandas</span>
+            <span class="tool-tag tt-amber">Python</span>
+            <span class="tool-tag tt-coral">Sankhya API</span>
+            <span class="tool-tag tt-amber">openpyxl</span>
+            <span class="tool-tag tt-amber">Pandas</span>
           </div>
         </a>
 
-        <!-- PROJETO 5 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-auto">Automação</span>
           <p class="project-name">Sistema SAC com Power Automate</p>
@@ -730,14 +704,13 @@
             Formulários Microsoft Forms geram cards no Planner roteados por categoria (GARANTIA, DEVOLUÇÃO, RASTREIO), com notificações por e-mail e rastreamento de status via Power Automate.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">Power Automate</span>
-            <span class="tool-tag">Microsoft Forms</span>
-            <span class="tool-tag">Planner</span>
-            <span class="tool-tag">Graph API</span>
+            <span class="tool-tag tt-green">Power Automate</span>
+            <span class="tool-tag tt-blue">Microsoft Forms</span>
+            <span class="tool-tag tt-blue">Planner</span>
+            <span class="tool-tag tt-blue">Graph API</span>
           </div>
         </a>
 
-        <!-- PROJETO 6 -->
         <a class="project-card" href="#" target="_blank">
           <span class="project-category cat-bi">BI & Dashboard</span>
           <p class="project-name">Análise Semanal de Vendas</p>
@@ -745,9 +718,9 @@
             Power Query M com agrupamento por semanas segunda–domingo usando WEEKDAY, deduplicação de VLRNOTA por NUNOTA, métricas de recompra e clientes ativos por carteira.
           </p>
           <div class="project-tools">
-            <span class="tool-tag">Power Query M</span>
-            <span class="tool-tag">Power BI</span>
-            <span class="tool-tag">DAX</span>
+            <span class="tool-tag tt-blue">Power Query M</span>
+            <span class="tool-tag tt-blue">Power BI</span>
+            <span class="tool-tag tt-blue">DAX</span>
           </div>
         </a>
 
@@ -784,6 +757,7 @@
             <li class="skill-item sk-amber"><span class="skill-dot"></span> SAP / TOTVS / Sankhya ERP — integração e extração</li>
             <li class="skill-item sk-purple"><span class="skill-dot"></span> PySpark · Engenharia de Dados (PUC Minas)</li>
             <li class="skill-item sk-blue"><span class="skill-dot"></span> Microsoft 365 — SharePoint, Planner, Graph API</li>
+            <li class="skill-item sk-coral"><span class="skill-dot"></span> Agentes de IA com Claude — LLMs, tool use, automação inteligente</li>
           </ul>
         </div>
       </div>
@@ -795,10 +769,21 @@
     <section id="activity">
       <div class="section-header">
         <span class="section-title">GitHub Activity</span>
-        <a href="https://github.com/v0ldika" target="_blank" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">github.com/v0ldika ↗</a>
+        <a href="https://github.com/v0ldika" target="_blank" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">github.com/v0ldika ↗</a>
       </div>
       <div class="calendar-wrapper">
-        <div class="calendar">Carregando contribuições...</div>
+        <div class="gh-chart-inner">
+          <img
+            src="https://ghchart.rshah.org/4f9cf9/v0ldika"
+            alt="GitHub contribution graph de v0ldika"
+            class="gh-chart"
+          />
+        </div>
+        <div class="gh-chart-footer">
+          <span>Contribuições do último ano</span>
+          <span style="color:var(--border)">·</span>
+          <a href="https://github.com/settings/profile" target="_blank">Contribuições privadas? Ativar em GitHub → Settings → Profile</a>
+        </div>
       </div>
     </section>
   </div>
@@ -811,16 +796,20 @@
       </div>
       <div class="contact-row">
         <a class="contact-link" href="https://linkedin.com/in/vinicius-mariano-dados" target="_blank">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           linkedin
         </a>
         <a class="contact-link" href="https://github.com/v0ldika" target="_blank">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           github
         </a>
         <a class="contact-link" href="mailto:marianoviniciusr@gmail.com">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
           e-mail
+        </a>
+        <a class="contact-link" href="tel:+5521995513103">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          (21) 99551-3103
         </a>
       </div>
     </section>
@@ -832,11 +821,6 @@
       <p>© 2025 Vinicius Mariano — construído com HTML puro, hospedado no GitHub Pages</p>
     </div>
   </footer>
-
-  <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-  <script>
-    GitHubCalendar(".calendar", "v0ldika", { responsive: true, global_stats: false });
-  </script>
 
 </body>
 </html>
