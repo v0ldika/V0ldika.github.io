@@ -426,6 +426,38 @@
       flex-shrink: 0;
     }
 
+    /* ─── SKILL COLORS ─────────────────────────── */
+    .sk-amber        { color: var(--amber) !important; }
+    .sk-amber .skill-dot  { background: var(--amber); }
+    .sk-blue         { color: var(--accent) !important; }
+    .sk-blue  .skill-dot  { background: var(--accent); }
+    .sk-green        { color: var(--green) !important; }
+    .sk-green .skill-dot  { background: var(--green); }
+    .sk-coral        { color: var(--coral) !important; }
+    .sk-coral .skill-dot  { background: var(--coral); }
+    .sk-purple       { color: var(--purple) !important; }
+    .sk-purple .skill-dot { background: var(--purple); }
+
+    /* ─── LINKEDIN / GITHUB BUTTONS ────────────── */
+    .btn-linkedin {
+      border-color: rgba(79,156,249,0.35);
+      color: var(--accent);
+    }
+    .btn-linkedin:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .btn-github {
+      border-color: rgba(167,139,250,0.35);
+      color: var(--purple);
+    }
+    .btn-github:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      background: var(--purple-dim);
+    }
+
     /* ─── GITHUB CALENDAR ──────────────────────── */
     .calendar-wrapper {
       background: var(--bg-card);
@@ -441,25 +473,48 @@
       color: var(--text-muted);
     }
 
-    /* override github-calendar default white theme */
+    /* restore sr-only — global CSS reset strips overflow:hidden */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* dark theme container */
+    .calendar .js-calendar-graph,
+    .calendar .js-yearly-contributions,
+    .calendar .contrib-footer,
+    .calendar .float-left { background: transparent !important; }
+
+    /* text and links */
+    .calendar svg text { fill: var(--text-muted) !important; }
     .calendar .contrib-legend,
     .calendar .text-small,
-    .calendar .contrib-footer,
-    .calendar .float-left.text-gray {
-      color: var(--text-muted) !important;
-    }
+    .calendar .text-gray,
+    .calendar .contrib-footer { color: var(--text-muted) !important; }
+    .calendar a { color: var(--text-muted) !important; text-decoration: none; }
+    .calendar a:hover { color: var(--accent) !important; }
+    .calendar h2, .calendar .f4 { display: none !important; }
 
-    .calendar svg text {
-      fill: var(--text-muted) !important;
-    }
+    /* contribution squares — accent blue scale */
+    .calendar rect[data-level="0"] { fill: rgba(255,255,255,0.05) !important; }
+    .calendar rect[data-level="1"] { fill: rgba(79,156,249,0.25) !important; }
+    .calendar rect[data-level="2"] { fill: rgba(79,156,249,0.48) !important; }
+    .calendar rect[data-level="3"] { fill: rgba(79,156,249,0.72) !important; }
+    .calendar rect[data-level="4"] { fill: rgba(79,156,249,0.95) !important; }
 
-    .calendar .js-yearly-contributions {
-      background: transparent !important;
-    }
-
-    .calendar h2.f4 {
-      display: none;
-    }
+    /* legend */
+    .calendar .legend li:nth-child(1) { background-color: rgba(255,255,255,0.05) !important; }
+    .calendar .legend li:nth-child(2) { background-color: rgba(79,156,249,0.25) !important; }
+    .calendar .legend li:nth-child(3) { background-color: rgba(79,156,249,0.48) !important; }
+    .calendar .legend li:nth-child(4) { background-color: rgba(79,156,249,0.72) !important; }
+    .calendar .legend li:nth-child(5) { background-color: rgba(79,156,249,0.95) !important; }
 
     /* ─── CONTACT ──────────────────────────────── */
     .contact-row {
@@ -560,10 +615,11 @@
           <p class="hero-label">Líder de Dados e Automações · Eletrofrigor</p>
           <h1>Vinicius<br /><em>Mariano</em></h1>
           <p class="hero-desc">
-            Analista de Dados Pleno na Eletrofrigor. Após 3 anos em supply chain e compras,
-            migrei para dados — unindo visão de negócio com soluções técnicas em Python, SQL
-            e Power BI. Automação de processos, dashboards gerenciais e KPIs que apoiam
-            decisões estratégicas. Pós-graduando em Engenharia de Dados pela PUC Minas.
+            3 anos na área de dados, hoje Líder de Dados e Automações na Eletrofrigor.
+            Especializado em Python para automação e engenharia de dados, SQL, Power BI
+            e integração de sistemas. Construo soluções end-to-end — da extração no ERP
+            até dashboards e workflows que transformam dados em decisões.
+            Pós-graduando em Engenharia de Dados pela PUC Minas.
           </p>
           <div class="hero-stack">
             <span class="stack-pill">Python</span>
@@ -580,8 +636,8 @@
           </div>
           <div class="hero-cta">
             <a href="#projetos" class="btn-primary">Ver projetos</a>
-            <a href="https://linkedin.com/in/vinicius-mariano-dados" target="_blank" class="btn-ghost">LinkedIn</a>
-            <a href="https://github.com/v0ldika" target="_blank" class="btn-ghost">GitHub</a>
+            <a href="https://linkedin.com/in/vinicius-mariano-dados" target="_blank" class="btn-ghost btn-linkedin">LinkedIn</a>
+            <a href="https://github.com/v0ldika" target="_blank" class="btn-ghost btn-github">GitHub</a>
           </div>
         </div>
         <div class="hero-avatar-wrap">
@@ -704,24 +760,24 @@
         <div class="about-cell">
           <h3>Perfil</h3>
           <p>
-            Analista de Dados Pleno na Eletrofrigor. Após 3 anos em supply chain e compras,
-            migrei para dados — unindo visão de negócio com Python, SQL e Power BI.
-            Experiência com extração e modelagem de dados, dashboards gerenciais,
-            automação de processos e KPIs que apoiam decisões estratégicas.
+            3 anos na área de dados, hoje Líder de Dados e Automações na Eletrofrigor.
+            Especializado em Python para automação e engenharia de dados, SQL, Power BI
+            e integração de sistemas. Construo pipelines, dashboards e workflows
+            end-to-end que transformam dados em decisões estratégicas.
             Pós-graduando em Engenharia de Dados pela PUC Minas.
           </p>
         </div>
         <div class="about-cell">
           <h3>Competências</h3>
           <ul class="skill-list">
-            <li class="skill-item"><span class="skill-dot"></span> Python — Pandas, NumPy, Seaborn, Matplotlib, Plotly</li>
-            <li class="skill-item"><span class="skill-dot"></span> SQL — Oracle, MySQL, PostgreSQL · CTEs, otimização</li>
-            <li class="skill-item"><span class="skill-dot"></span> Power BI — modelagem, DAX, RLS, Power Query M</li>
-            <li class="skill-item"><span class="skill-dot"></span> n8n / Power Automate — integrações e workflows</li>
-            <li class="skill-item"><span class="skill-dot"></span> Looker Studio / Tableau — visualização de dados</li>
-            <li class="skill-item"><span class="skill-dot"></span> SAP / TOTVS / Sankhya ERP — integração e extração</li>
-            <li class="skill-item"><span class="skill-dot"></span> PySpark · Engenharia de Dados (PUC Minas)</li>
-            <li class="skill-item"><span class="skill-dot"></span> Microsoft 365 — SharePoint, Planner, Graph API</li>
+            <li class="skill-item sk-amber"><span class="skill-dot"></span> Python — Pandas, NumPy, Seaborn, Matplotlib, Plotly</li>
+            <li class="skill-item sk-purple"><span class="skill-dot"></span> SQL — Oracle, MySQL, PostgreSQL · CTEs, otimização</li>
+            <li class="skill-item sk-blue"><span class="skill-dot"></span> Power BI — modelagem, DAX, RLS, Power Query M</li>
+            <li class="skill-item sk-green"><span class="skill-dot"></span> n8n / Power Automate — integrações e workflows</li>
+            <li class="skill-item sk-coral"><span class="skill-dot"></span> Looker Studio / Tableau — visualização de dados</li>
+            <li class="skill-item sk-amber"><span class="skill-dot"></span> SAP / TOTVS / Sankhya ERP — integração e extração</li>
+            <li class="skill-item sk-purple"><span class="skill-dot"></span> PySpark · Engenharia de Dados (PUC Minas)</li>
+            <li class="skill-item sk-blue"><span class="skill-dot"></span> Microsoft 365 — SharePoint, Planner, Graph API</li>
           </ul>
         </div>
       </div>
@@ -773,7 +829,7 @@
 
   <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
   <script>
-    GitHubCalendar(".calendar", "V0ldika", { responsive: true });
+    GitHubCalendar(".calendar", "v0ldika", { responsive: true, global_stats: false });
   </script>
 
 </body>
