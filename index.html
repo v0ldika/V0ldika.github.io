@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinicius Mariano — Líder de Dados e Automações</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f12;
+      --bg-card: #13161b;
+      --bg-hover: #1a1e25;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --text-primary: #e8eaf0;
+      --text-secondary: #7b8394;
+      --text-muted: #4a5060;
+      --accent: #4f9cf9;
+      --accent-dim: rgba(79,156,249,0.12);
+      --green: #3ecf8e;
+      --green-dim: rgba(62,207,142,0.1);
+      --amber: #f5a623;
+      --amber-dim: rgba(245,166,35,0.1);
+      --coral: #f07060;
+      --coral-dim: rgba(240,112,96,0.1);
+      --purple: #a78bfa;
+      --purple-dim: rgba(167,139,250,0.1);
+      --font-sans: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ─── NOISE TEXTURE ─────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── GRID LINE BACKGROUND ──────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT ───────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── NAV ──────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      padding: 7rem 0 5rem;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-avatar-wrap {
+      flex-shrink: 0;
+      padding-top: 1rem;
+    }
+
+    .hero-avatar {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(79, 156, 249, 0.3);
+      display: block;
+      filter: grayscale(10%);
+      transition: border-color 0.3s, filter 0.3s;
+    }
+
+    .hero-avatar:hover {
+      border-color: var(--accent);
+      filter: grayscale(0%);
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--text-secondary);
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stack-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .stack-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text-secondary);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0d0f12;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+    }
+
+    /* ─── SECTION HEADER ───────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-count {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── PROJECT GRID ─────────────────────────── */
+    section { padding: 4rem 0; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      padding: 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover { background: var(--bg-hover); }
+
+    .project-card::after {
+      content: '↗';
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translate(-4px, 4px);
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .cat-bi        { background: var(--accent-dim);  color: var(--accent); }
+    .cat-auto      { background: var(--green-dim);   color: var(--green); }
+    .cat-python    { background: var(--amber-dim);   color: var(--amber); }
+    .cat-sql       { background: var(--purple-dim);  color: var(--purple); }
+    .cat-eng       { background: var(--coral-dim);   color: var(--coral); }
+
+    .project-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .project-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: auto;
+    }
+
+    .tool-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+    }
+
+    /* ─── ABOUT ────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .about-cell {
+      background: var(--bg-card);
+      padding: 2rem;
+    }
+
+    .about-cell h3 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-cell p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .skill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ─── GITHUB CALENDAR ──────────────────────── */
+    .calendar-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      overflow-x: auto;
+    }
+
+    .calendar {
+      min-height: 140px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* override github-calendar default white theme */
+    .calendar .contrib-legend,
+    .calendar .text-small,
+    .calendar .contrib-footer,
+    .calendar .float-left.text-gray {
+      color: var(--text-muted) !important;
+    }
+
+    .calendar svg text {
+      fill: var(--text-muted) !important;
+    }
+
+    .calendar .js-yearly-contributions {
+      background: transparent !important;
+    }
+
+    .calendar h2.f4 {
+      display: none;
+    }
+
+    /* ─── CONTACT ──────────────────────────────── */
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* ─── FOOTER ───────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+      nav { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .hero-inner { flex-direction: column-reverse; align-items: center; gap: 2rem; }
+      .hero-avatar { width: 120px; height: 120px; }
+      .hero-avatar-wrap { padding-top: 0; }
+    }
+
+    /* ─── FADE IN ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.32s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.38s; }
+
+    .hero-avatar-wrap {
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="container">
+    <nav>
+      <span class="nav-logo">v0ldika.dados</span>
+      <ul class="nav-links">
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#activity">GitHub</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="hero-label">Líder de Dados e Automações · Eletrofrigor</p>
+          <h1>Vinicius<br /><em>Mariano</em></h1>
+          <p class="hero-desc">
+            Analista de Dados Pleno na Eletrofrigor. Após 3 anos em supply chain e compras,
+            migrei para dados — unindo visão de negócio com soluções técnicas em Python, SQL
+            e Power BI. Automação de processos, dashboards gerenciais e KPIs que apoiam
+            decisões estratégicas. Pós-graduando em Engenharia de Dados pela PUC Minas.
+          </p>
+          <div class="hero-stack">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">Oracle SQL</span>
+            <span class="stack-pill">Power BI</span>
+            <span class="stack-pill">n8n</span>
+            <span class="stack-pill">Power Automate</span>
+            <span class="stack-pill">Pandas</span>
+            <span class="stack-pill">DAX</span>
+            <span class="stack-pill">Power Query M</span>
+            <span class="stack-pill">Looker Studio</span>
+            <span class="stack-pill">PySpark</span>
+            <span class="stack-pill">Sankhya ERP</span>
+          </div>
+          <div class="hero-cta">
+            <a href="#projetos" class="btn-primary">Ver projetos</a>
+            <a href="https://linkedin.com/in/vinicius-mariano-dados" target="_blank" class="btn-ghost">LinkedIn</a>
+            <a href="https://github.com/v0ldika" target="_blank" class="btn-ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-avatar-wrap">
+          <img src="perfil.jpg" alt="Vinicius Mariano" class="hero-avatar" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJETOS -->
+  <div class="container">
+    <section id="projetos">
+      <div class="section-header">
+        <span class="section-title">Projetos</span>
+        <span class="section-count">06 projetos</span>
+      </div>
+
+      <div class="project-grid">
+
+        <!-- PROJETO 1 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-bi">BI & Dashboard</span>
+          <p class="project-name">Dashboard de Pipeline de Cotações</p>
+          <p class="project-desc">
+            Análise do funil de cotações integrando tabelas TGFCAB, TGFITE e TGFCAB_EXC com status ABERTO, GANHO, EXCLUÍDO e CANCELADO. Taxa de conversão e prazo médio por carteira.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Power BI</span>
+            <span class="tool-tag">Oracle SQL</span>
+            <span class="tool-tag">DAX</span>
+            <span class="tool-tag">Sankhya ERP</span>
+          </div>
+        </a>
+
+        <!-- PROJETO 2 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-sql">Engenharia SQL</span>
+          <p class="project-name">Indicadores Operacionais Semanais</p>
+          <p class="project-desc">
+            Dashboard semanal com CTEs em Oracle SQL — movimentações, estoque em trânsito (loc. 51000000), garantias e devoluções, consolidado com TRUNC(DTNEG, 'IW') para semanas ISO.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Oracle SQL</span>
+            <span class="tool-tag">CTEs</span>
+            <span class="tool-tag">Power BI</span>
+          </div>
+        </a>
+
+        <!-- PROJETO 3 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-auto">Automação</span>
+          <p class="project-name">Integração ERP → SharePoint via n8n</p>
+          <p class="project-desc">
+            Workflow n8n que extrai dados do Sankhya via API e sincroniza com SharePoint Lists. Suporte a formato entity-based e row-based da resposta DbExplorerSP.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">n8n</span>
+            <span class="tool-tag">JavaScript</span>
+            <span class="tool-tag">Sankhya API</span>
+            <span class="tool-tag">SharePoint</span>
+          </div>
+        </a>
+
+        <!-- PROJETO 4 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-python">Python</span>
+          <p class="project-name">Sistema de Análise de Estoque</p>
+          <p class="project-desc">
+            Extração paginada da API Sankhya (4.500 registros/página), sugestões de transferências entre empresas com regras de negócio, ranking por criticalidade e exportação Excel via openpyxl.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Sankhya API</span>
+            <span class="tool-tag">openpyxl</span>
+            <span class="tool-tag">Pandas</span>
+          </div>
+        </a>
+
+        <!-- PROJETO 5 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-auto">Automação</span>
+          <p class="project-name">Sistema SAC com Power Automate</p>
+          <p class="project-desc">
+            Formulários Microsoft Forms geram cards no Planner roteados por categoria (GARANTIA, DEVOLUÇÃO, RASTREIO), com notificações por e-mail e rastreamento de status via Power Automate.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Power Automate</span>
+            <span class="tool-tag">Microsoft Forms</span>
+            <span class="tool-tag">Planner</span>
+            <span class="tool-tag">Graph API</span>
+          </div>
+        </a>
+
+        <!-- PROJETO 6 -->
+        <a class="project-card" href="#" target="_blank">
+          <span class="project-category cat-bi">BI & Dashboard</span>
+          <p class="project-name">Análise Semanal de Vendas</p>
+          <p class="project-desc">
+            Power Query M com agrupamento por semanas segunda–domingo usando WEEKDAY, deduplicação de VLRNOTA por NUNOTA, métricas de recompra e clientes ativos por carteira.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Power Query M</span>
+            <span class="tool-tag">Power BI</span>
+            <span class="tool-tag">DAX</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- SOBRE -->
+  <div class="container">
+    <section id="sobre">
+      <div class="section-header">
+        <span class="section-title">Sobre</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-cell">
+          <h3>Perfil</h3>
+          <p>
+            Analista de Dados Pleno na Eletrofrigor. Após 3 anos em supply chain e compras,
+            migrei para dados — unindo visão de negócio com Python, SQL e Power BI.
+            Experiência com extração e modelagem de dados, dashboards gerenciais,
+            automação de processos e KPIs que apoiam decisões estratégicas.
+            Pós-graduando em Engenharia de Dados pela PUC Minas.
+          </p>
+        </div>
+        <div class="about-cell">
+          <h3>Competências</h3>
+          <ul class="skill-list">
+            <li class="skill-item"><span class="skill-dot"></span> Python — Pandas, NumPy, Seaborn, Matplotlib, Plotly</li>
+            <li class="skill-item"><span class="skill-dot"></span> SQL — Oracle, MySQL, PostgreSQL · CTEs, otimização</li>
+            <li class="skill-item"><span class="skill-dot"></span> Power BI — modelagem, DAX, RLS, Power Query M</li>
+            <li class="skill-item"><span class="skill-dot"></span> n8n / Power Automate — integrações e workflows</li>
+            <li class="skill-item"><span class="skill-dot"></span> Looker Studio / Tableau — visualização de dados</li>
+            <li class="skill-item"><span class="skill-dot"></span> SAP / TOTVS / Sankhya ERP — integração e extração</li>
+            <li class="skill-item"><span class="skill-dot"></span> PySpark · Engenharia de Dados (PUC Minas)</li>
+            <li class="skill-item"><span class="skill-dot"></span> Microsoft 365 — SharePoint, Planner, Graph API</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- GITHUB ACTIVITY -->
+  <div class="container">
+    <section id="activity">
+      <div class="section-header">
+        <span class="section-title">GitHub Activity</span>
+        <a href="https://github.com/v0ldika" target="_blank" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">github.com/v0ldika ↗</a>
+      </div>
+      <div class="calendar-wrapper">
+        <div class="calendar">Carregando contribuições...</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTATO -->
+  <div class="container">
+    <section id="contato">
+      <div class="section-header">
+        <span class="section-title">Contato</span>
+      </div>
+      <div class="contact-row">
+        <a class="contact-link" href="https://linkedin.com/in/vinicius-mariano-dados" target="_blank">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          linkedin
+        </a>
+        <a class="contact-link" href="https://github.com/v0ldika" target="_blank">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          github
+        </a>
+        <a class="contact-link" href="mailto:marianoviniciusr@gmail.com">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          e-mail
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Vinicius Mariano — construído com HTML puro, hospedado no GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+  <script>
+    GitHubCalendar(".calendar", "V0ldika", { responsive: true });
+  </script>
+
+</body>
+</html>
